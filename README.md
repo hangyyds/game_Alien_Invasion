@@ -1,0 +1,2 @@
+# game_Alien_Invasion
+学习python，书本python从入门到实践上的小游戏
