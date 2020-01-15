@@ -7,6 +7,7 @@ from ship import Ship
 from game_stats import GameStats
 from background import Background
 from button import Button
+from scoreboard import Scoreboard
 import game_functions as gf
 from pygame.sprite import Group
 
@@ -47,16 +48,19 @@ def run_game():
     #创建一个用于存储游戏统计信息的实例
     stats = GameStats(ai_settings)
 
+    #创建一个记分牌
+    sb = Scoreboard(ai_settings,screen,stats)
+
     #开始游戏的主循环
     while True:
-        gf.check_events(ai_settings,stats,screen,ship,bullets,aliens,play_button)
+        gf.check_events(ai_settings,stats,screen,sb,ship,bullets,aliens,play_button)
 
         if stats.game_active :
             gf.update_ship(ship)
-            gf.update_bullets(ai_settings,screen,ship,aliens,bullets)
-            gf.update_aliens(ai_settings,stats,screen,ship,aliens,bullets)
+            gf.update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets)
+            gf.update_aliens(ai_settings,stats,screen,sb,ship,aliens,bullets)
 
-        gf.update_screen(ai_settings,stats,screen,ship,background,bullets,aliens,play_button)
+        gf.update_screen(ai_settings,stats,sb,screen,ship,background,bullets,aliens,play_button)
 
         # print(len(bullets))
 
